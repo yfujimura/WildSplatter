@@ -1,0 +1,8 @@
+*.ipynb
+outputs
+torchrun_logs
+ckpts
+.ipynb_checkpoints
+__pycache__
+src/main.py
+src/test_nerf_osr.py

@@ -1,0 +1,82 @@
+mode: train
+
+seed: 1234
+
+ckpt_path: ./ckpts/wild_splatter.ckpt
+
+model:
+  da3:
+    pretrained_model: depth-anything/DA3-GIANT-1.1
+    backbone:
+      train_mode: frozen
+    head:
+      train_mode: frozen
+  wild_splatter:
+    appearance_encoder:
+      in_dim: 1536
+      out_dim: 32
+      transformer:
+        n_blocks: 2
+        patch_size: 14
+      head:
+        hidden_dim: 512
+        n_layers: 3
+
+dataset:
+  dataset_path: /path/to/dataset
+  n_views: 3
+  val_ratio: 0.1
+  image_size: 504
+  train_all: true
+
+data_loader:
+  train:
+    num_workers: 16
+    persistent_workers: true
+    batch_size: 16
+    seed: 1234
+  test:
+    num_workers: 16
+    persistent_workers: false
+    batch_size: 1
+    seed: 2345
+  val:
+    num_workers: 4
+    persistent_workers: true
+    batch_size: 4
+    seed: 3456
+
+optimizer:
+  lr:
+    da3:
+      gs_head: 5e-5
+    app_encoder: 5e-5
+    gs_decoder: 5e-5
+    offset_decoder: 1e-5
+  warm_up_steps: 2000
+
+loss:
+  mse:
+    weight: 1.0
+  lpips:
+    weight: 0.5
+
+train:
+  print_log_every_n_steps: 10
+
+trainer:
+  num_nodes: 1
+  max_steps: 15_000
+  val_check_interval: 2500
+  gradient_clip_val: 0.5
+  limit_val_batches: 1.0
+
+checkpointing:
+  every_n_train_steps: 2500
+  save_top_k: 1
+  save_weights_only: true
+
+wandb:
+  mode: online
+  project: wild_splatter_v3
+  name: v1.0
