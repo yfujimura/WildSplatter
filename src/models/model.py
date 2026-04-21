@@ -5,7 +5,7 @@ from torch import nn
 import torch.nn.functional as F
 from einops import rearrange, repeat
 from functools import partial
-from minlora import add_lora, LoRAParametrization
+#from minlora import add_lora, LoRAParametrization
 
 from src.models.appearance_encoder import AppearanceEncoder
 from src.models.utils import _copy_output_conv2, _copy_output_conv2_with_zero_init, _copy_output_conv2_with_app_in, _copy_output_conv2_aux_for_conf

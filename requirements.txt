@@ -13,8 +13,13 @@ pillow
 omegaconf
 evo
 e3nn
-moviepy
+moviepy==1.0.3
 plyfile
 pillow_heif
 safetensors
 pycolmap
+hydra-core
+pytorch-lightning
+lpips
+wandb
+scikit-image

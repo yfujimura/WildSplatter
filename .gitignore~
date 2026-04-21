@@ -1,7 +1,0 @@
-*.ipynb
-outputs
-torchrun_logs
-ckpts
-.ipynb_checkpoints
-__pycache__
-src/main.py

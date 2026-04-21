@@ -3,7 +3,7 @@ import math
 import torch
 from torch import nn
 from einops import rearrange, repeat
-from minlora import get_lora_params
+#from minlora import get_lora_params
 
 from pytorch_lightning import LightningModule
 from pytorch_lightning.utilities import rank_zero_only
