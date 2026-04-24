@@ -4,7 +4,7 @@
 
 This repository provides the official PyTorch implementation of "**WildSplatter: Feed-forward 3D Gaussian Splatting with Appearance Control from Unconstrained Images**." 
 
-[![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX)
+[![arXiv](https://img.shields.io/badge/arXiv-2604.21182-b31b1b.svg)](https://arxiv.org/abs/2604.21182)
 
 ## Installation
 Our code has been tested with CUDA 12.6. You can set up the environment as follows:
@@ -43,7 +43,7 @@ If you find our work useful for your research, please consider citing:
 @article{Fujimura_2026_WildSplatter,
     author    = {Fujimura, Yuki and Kushida, Takahiro and Kitano, Kazuya and Funatomi, Takuya and Mukaigawa, Yasuhiro},
     title     = {WildSplatter: Feed-forward 3D Gaussian Splatting with Appearance Control from Unconstrained Images},
-    journal   = {arXiv preprint arXiv:},
+    journal   = {arXiv preprint arXiv:2604.21182},
     year      = {2026}
 }
 ```
