@@ -23,7 +23,7 @@ model:
         n_layers: 3
 
 dataset:
-  dataset_path: /path/to/dataset
+  dataset_path: /path/to/viewsets
   n_views: 3
   val_ratio: 0.1
   image_size: 504
@@ -78,5 +78,5 @@ checkpointing:
 
 wandb:
   mode: online
-  project: wild_splatter_v3
+  project: wild_splatter
   name: v1.0

@@ -33,9 +33,55 @@ Example images are available in the ```assets``` directory. To run the demo:
 CUDA_VISIBLE_DEVICES=0 python -m src.app_interp
 ```
 
+## Training
+
+### Preparing the training dataset
+
+#### 1. Download the MegaScenes dataset
+We use the [MegaScenes dataset](https://github.com/MegaScenes/dataset) to train our model. Please follow the official download instructions. We assume the downloaded dataset has the following directory structure:
+- ```MegaScenes/```
+    -  ```databases/```
+    -  ```images/```
+    -  ```reconstruct/```
+
+#### 2. Estimate monocular depths for all scenes
+Next, estimate monocular depth maps for all scenes. We align the predicted depth maps to the COLMAP sparse points by estimating the scale and bias with RANSAC. The aligned depth maps are then used to compute coverage scores between images during view set generation. Run the following commands:
+```
+cd src/megascenes_tool
+
+# Single-GPU for one sub scene directories (000)
+python precompute_depths_da3.py \
+  --root_dir /path/to/MegaScenes \
+  --depth_root /path/to/depths \
+  --i0_start 0 --i0_end 0 --batch_size 256
+
+# Multi-GPU for all scenes (000-458)
+torchrun --nproc_per_node=4 precompute_depths_da3.py \
+  --root_dir /path/to/MegaScenes \
+  --depth_root /path/to/depths \
+  --i0_start 0 --i0_end 458 --batch_size 256
+```
+
+#### 3. Generate view sets for training
+Finally, generate view sets with sufficient overlap for training by running:
+```
+# Make view sets for all scenes (000-458)
+python make_viewsets.py \
+  --root_dir/path/to/MegaScenes \
+  --depth_root /path/to/depths \
+  --i0_start 0 --i0_end 458 
+```
+
+### Training
+To start training, run the following command. Make sure to edit ```configs/main.yaml``` to match your environment before training.
+```
+python -m src.main
+```
+
+
 ## TODO
+- [x] Release training script and dataset
 - [ ] Release test script for NeRF-OSR
-- [ ] Release training script and dataset
 
 ## Citation
 If you find our work useful for your research, please consider citing:
